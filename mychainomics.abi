@@ -1,0 +1,508 @@
+{
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT ",
+    "version": "eosio::abi/1.1",
+    "types": [],
+    "structs": [
+        {
+            "name": "addconsumer",
+            "base": "",
+            "fields": [
+                {
+                    "name": "owner",
+                    "type": "name"
+                },
+                {
+                    "name": "consumer_id",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "addprovider",
+            "base": "",
+            "fields": [
+                {
+                    "name": "owner",
+                    "type": "name"
+                },
+                {
+                    "name": "provider_id",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "addtoken",
+            "base": "",
+            "fields": [
+                {
+                    "name": "extended_asset",
+                    "type": "extended_asset"
+                }
+            ]
+        },
+        {
+            "name": "adduser",
+            "base": "",
+            "fields": [
+                {
+                    "name": "owner",
+                    "type": "name"
+                },
+                {
+                    "name": "chainomics_id",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "authdatacons",
+            "base": "",
+            "fields": [
+                {
+                    "name": "chainomics_id",
+                    "type": "name"
+                },
+                {
+                    "name": "provider_id",
+                    "type": "name"
+                },
+                {
+                    "name": "remove",
+                    "type": "bool"
+                }
+            ]
+        },
+        {
+            "name": "authdataprov",
+            "base": "",
+            "fields": [
+                {
+                    "name": "chainomics_id",
+                    "type": "name"
+                },
+                {
+                    "name": "provider_id",
+                    "type": "name"
+                },
+                {
+                    "name": "remove",
+                    "type": "bool"
+                }
+            ]
+        },
+        {
+            "name": "consumermeta",
+            "base": "",
+            "fields": [
+                {
+                    "name": "consumer_id",
+                    "type": "name"
+                },
+                {
+                    "name": "new_consumer_meta",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "consumers_",
+            "base": "",
+            "fields": [
+                {
+                    "name": "owner",
+                    "type": "name"
+                },
+                {
+                    "name": "consumer_id",
+                    "type": "name"
+                },
+                {
+                    "name": "meta",
+                    "type": "string"
+                },
+                {
+                    "name": "supported_datatypes",
+                    "type": "name[]"
+                }
+            ]
+        },
+        {
+            "name": "delconsumers",
+            "base": "",
+            "fields": []
+        },
+        {
+            "name": "delproviders",
+            "base": "",
+            "fields": []
+        },
+        {
+            "name": "deltokens",
+            "base": "",
+            "fields": []
+        },
+        {
+            "name": "delusers",
+            "base": "",
+            "fields": []
+        },
+        {
+            "name": "events_",
+            "base": "",
+            "fields": [
+                {
+                    "name": "consumer_owner",
+                    "type": "name"
+                },
+                {
+                    "name": "event_id",
+                    "type": "name"
+                },
+                {
+                    "name": "start_time_ms",
+                    "type": "uint32"
+                },
+                {
+                    "name": "end_time_ms",
+                    "type": "uint32"
+                },
+                {
+                    "name": "meta",
+                    "type": "string"
+                },
+                {
+                    "name": "required_datatypes",
+                    "type": "name[]"
+                },
+                {
+                    "name": "participants",
+                    "type": "name[]"
+                }
+            ]
+        },
+        {
+            "name": "externalxfer",
+            "base": "",
+            "fields": [
+                {
+                    "name": "from_chainomic_account",
+                    "type": "name"
+                },
+                {
+                    "name": "to_chain_account",
+                    "type": "name"
+                },
+                {
+                    "name": "quantity",
+                    "type": "asset"
+                },
+                {
+                    "name": "memo",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "freezeuser",
+            "base": "",
+            "fields": [
+                {
+                    "name": "chainomics_id",
+                    "type": "name"
+                },
+                {
+                    "name": "freeze",
+                    "type": "bool"
+                }
+            ]
+        },
+        {
+            "name": "internalxfer",
+            "base": "",
+            "fields": [
+                {
+                    "name": "from_chainomic_account",
+                    "type": "name"
+                },
+                {
+                    "name": "to_chainomic_account",
+                    "type": "name"
+                },
+                {
+                    "name": "quantity",
+                    "type": "asset"
+                },
+                {
+                    "name": "memo",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "providermeta",
+            "base": "",
+            "fields": [
+                {
+                    "name": "provider_id",
+                    "type": "name"
+                },
+                {
+                    "name": "new_provider_meta",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "providers_",
+            "base": "",
+            "fields": [
+                {
+                    "name": "owner",
+                    "type": "name"
+                },
+                {
+                    "name": "provider_id",
+                    "type": "name"
+                },
+                {
+                    "name": "meta",
+                    "type": "string"
+                },
+                {
+                    "name": "supported_datatypes",
+                    "type": "name[]"
+                }
+            ]
+        },
+        {
+            "name": "setlevel",
+            "base": "",
+            "fields": [
+                {
+                    "name": "chainomic_account",
+                    "type": "name"
+                },
+                {
+                    "name": "level",
+                    "type": "uint8"
+                }
+            ]
+        },
+        {
+            "name": "setusermeta",
+            "base": "",
+            "fields": [
+                {
+                    "name": "chainomics_id",
+                    "type": "name"
+                },
+                {
+                    "name": "new_user_meta",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "tokens_",
+            "base": "",
+            "fields": [
+                {
+                    "name": "token",
+                    "type": "extended_asset"
+                }
+            ]
+        },
+        {
+            "name": "users_",
+            "base": "",
+            "fields": [
+                {
+                    "name": "chainomics_id",
+                    "type": "name"
+                },
+                {
+                    "name": "owner",
+                    "type": "name"
+                },
+                {
+                    "name": "level",
+                    "type": "uint8"
+                },
+                {
+                    "name": "verified",
+                    "type": "bool"
+                },
+                {
+                    "name": "admin_freeze",
+                    "type": "bool"
+                },
+                {
+                    "name": "meta",
+                    "type": "string"
+                },
+                {
+                    "name": "tokens",
+                    "type": "asset[]"
+                },
+                {
+                    "name": "authorized_data_types",
+                    "type": "name[]"
+                },
+                {
+                    "name": "authorized_data_providers",
+                    "type": "name[]"
+                },
+                {
+                    "name": "authorized_data_consumers",
+                    "type": "name[]"
+                }
+            ]
+        },
+        {
+            "name": "verifyuser",
+            "base": "",
+            "fields": [
+                {
+                    "name": "chainomics_id",
+                    "type": "name"
+                },
+                {
+                    "name": "id_verification_hash",
+                    "type": "string"
+                }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "name": "addconsumer",
+            "type": "addconsumer",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "addprovider",
+            "type": "addprovider",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "addtoken",
+            "type": "addtoken",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "adduser",
+            "type": "adduser",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "authdatacons",
+            "type": "authdatacons",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "authdataprov",
+            "type": "authdataprov",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "consumermeta",
+            "type": "consumermeta",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "delconsumers",
+            "type": "delconsumers",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "delproviders",
+            "type": "delproviders",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "deltokens",
+            "type": "deltokens",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "delusers",
+            "type": "delusers",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "externalxfer",
+            "type": "externalxfer",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "freezeuser",
+            "type": "freezeuser",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "internalxfer",
+            "type": "internalxfer",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "providermeta",
+            "type": "providermeta",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "setlevel",
+            "type": "setlevel",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "setusermeta",
+            "type": "setusermeta",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "verifyuser",
+            "type": "verifyuser",
+            "ricardian_contract": ""
+        }
+    ],
+    "tables": [
+        {
+            "name": "consumers",
+            "type": "consumers_",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "events",
+            "type": "events_",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "providers",
+            "type": "providers_",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "tokens",
+            "type": "tokens_",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "users",
+            "type": "users_",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        }
+    ],
+    "ricardian_clauses": [],
+    "variants": []
+}

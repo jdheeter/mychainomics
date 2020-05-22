@@ -1,0 +1,9 @@
+{
+  "kylin":{
+    "token": "chainomictkn",
+    "accounts":"mychainomics"
+  },
+  "local":{
+    "token":"eosio.token"
+  }
+}
