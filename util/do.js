@@ -19,8 +19,8 @@ async function doAction(name,data,auth){
   }
 }
 
-async function adduser(owner,chainomics_id){
-  return doAction('adduser', { owner, chainomics_id }, acct('accounts')).then(result => console.log(result))
+async function adduser(owner,chainomics_id,invited_by){
+  return doAction('adduser', { owner, chainomics_id,invited_by }, acct('accounts')).then(result => console.log(result))
 }
 
 async function addconsumer (owner, consumer_id) {
@@ -28,13 +28,13 @@ async function addconsumer (owner, consumer_id) {
 }
 
 async function setusermeta (chainomics_id, new_user_meta) {
-  return doAction('setusermeta', { chainomics_id, new_user_meta }, acct('accounts')).then(result => console.log(result))
+  return doAction('setusermeta', { chainomics_id, new_user_meta:JSON.stringify(new_user_meta) }, acct('accounts')).then(result => console.log(result))
 }
 async function providermeta (provider_id, new_provider_meta) {
-  return doAction('providermeta', { provider_id, new_provider_meta }, acct('accounts')).then(result => console.log(result))
+  return doAction('providermeta', { provider_id, new_provider_meta:JSON.stringify(new_provider_meta) }, acct('accounts')).then(result => console.log(result))
 }
 async function consumermeta (consumer_id, new_consumer_meta) {
-  return doAction('consumermeta', { consumer_id, new_consumer_meta }, acct('accounts')).then(result => console.log(result))
+  return doAction('consumermeta', { consumer_id, new_consumer_meta:JSON.stringify(new_consumer_meta) }, acct('accounts')).then(result => console.log(result))
 }
 
 async function addprovider (owner, provider_id) {
@@ -79,9 +79,21 @@ async function setlevel (chainomic_account, level) {
   return doAction('setlevel', { chainomic_account, level }, acct('accounts')).then(result => console.log(result))
 }
 
+async function applytoevent (chainomics_id, event_id) {
+  return doAction('applytoevent', { chainomics_id, event_id }, acct('accounts')).then(result => console.log(result))
+}
+
+async function verifypartic (event_id, chainomics_id) {
+  return doAction('verifypartic', { event_id, chainomics_id }, acct('accounts')).then(result => console.log(result))
+}
+
+async function createevent (consumer_id, event_id,start_time_sec,end_time_sec,meta) {
+  return doAction('createevent', { consumer_id, event_id,start_time_sec,end_time_sec,meta:JSON.stringify(meta) }, acct('accounts')).then(result => console.log(result))
+}
+
 const methods = { adduser, reset, addtoken, internalxfer, externalxfer, authdataprov, 
   verifyuser, setlevel, freezeuser, authdatacons, addconsumer,
-  addprovider, setusermeta, providermeta, consumermeta }
+  addprovider, setusermeta, providermeta, consumermeta, applytoevent, createevent, verifypartic }
 
 if(process.argv[2] && require.main === module) {
   if (Object.keys(methods).find(el => el === process.argv[2])) {

@@ -52,6 +52,24 @@
                 {
                     "name": "chainomics_id",
                     "type": "name"
+                },
+                {
+                    "name": "invited_by",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "applytoevent",
+            "base": "",
+            "fields": [
+                {
+                    "name": "chainomics_id",
+                    "type": "name"
+                },
+                {
+                    "name": "event_id",
+                    "type": "name"
                 }
             ]
         },
@@ -64,7 +82,7 @@
                     "type": "name"
                 },
                 {
-                    "name": "provider_id",
+                    "name": "consumer_id",
                     "type": "name"
                 },
                 {
@@ -128,6 +146,32 @@
             ]
         },
         {
+            "name": "createevent",
+            "base": "",
+            "fields": [
+                {
+                    "name": "consumer_id",
+                    "type": "name"
+                },
+                {
+                    "name": "event_id",
+                    "type": "name"
+                },
+                {
+                    "name": "start_time_sec",
+                    "type": "uint32"
+                },
+                {
+                    "name": "end_time_sec",
+                    "type": "uint32"
+                },
+                {
+                    "name": "meta",
+                    "type": "string"
+                }
+            ]
+        },
+        {
             "name": "delconsumers",
             "base": "",
             "fields": []
@@ -160,11 +204,11 @@
                     "type": "name"
                 },
                 {
-                    "name": "start_time_ms",
+                    "name": "start_time_sec",
                     "type": "uint32"
                 },
                 {
-                    "name": "end_time_ms",
+                    "name": "end_time_sec",
                     "type": "uint32"
                 },
                 {
@@ -177,6 +221,10 @@
                 },
                 {
                     "name": "participants",
+                    "type": "name[]"
+                },
+                {
+                    "name": "applicants",
                     "type": "name[]"
                 }
             ]
@@ -326,6 +374,10 @@
                     "type": "name"
                 },
                 {
+                    "name": "invited_by",
+                    "type": "name"
+                },
+                {
                     "name": "level",
                     "type": "uint8"
                 },
@@ -356,6 +408,20 @@
                 {
                     "name": "authorized_data_consumers",
                     "type": "name[]"
+                }
+            ]
+        },
+        {
+            "name": "verifypartic",
+            "base": "",
+            "fields": [
+                {
+                    "name": "event_id",
+                    "type": "name"
+                },
+                {
+                    "name": "chainomics_id",
+                    "type": "name"
                 }
             ]
         },
@@ -396,6 +462,11 @@
             "ricardian_contract": ""
         },
         {
+            "name": "applytoevent",
+            "type": "applytoevent",
+            "ricardian_contract": ""
+        },
+        {
             "name": "authdatacons",
             "type": "authdatacons",
             "ricardian_contract": ""
@@ -408,6 +479,11 @@
         {
             "name": "consumermeta",
             "type": "consumermeta",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "createevent",
+            "type": "createevent",
             "ricardian_contract": ""
         },
         {
@@ -458,6 +534,11 @@
         {
             "name": "setusermeta",
             "type": "setusermeta",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "verifypartic",
+            "type": "verifypartic",
             "ricardian_contract": ""
         },
         {

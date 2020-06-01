@@ -15,7 +15,11 @@ CONTRACT mychainomics : public contract {
  public:
   using contract::contract;
 
-  ACTION adduser(const name& owner, const name& chainomics_id);
+  //----------//
+  // Actions  //
+  //----------//
+
+  ACTION adduser(const name& owner, const name& chainomics_id, const name& invited_by);
   ACTION addtoken(extended_asset extended_asset);
   ACTION internalxfer(const name& from_chainomic_account, const name& to_chainomic_account, asset& quantity, const std::string& memo);
   ACTION externalxfer(const name& from_chainomic_account, const name& to_chain_account, asset& quantity, const std::string& memo);
@@ -25,29 +29,43 @@ CONTRACT mychainomics : public contract {
 
   ACTION setusermeta(const name& chainomics_id, const string& new_user_meta);
   ACTION authdataprov(const name& chainomics_id, const name& provider_id, const bool& remove);
-  ACTION authdatacons(const name& chainomics_id, const name& provider_id, const bool& remove);
+  ACTION authdatacons(const name& chainomics_id, const name& consumer_id, const bool& remove);
 
   ACTION addconsumer(const name& owner, const name& consumer_id);
   ACTION addprovider(const name& owner, const name& provider_id);
 
   ACTION providermeta(const name& provider_id, const string& new_provider_meta);
   ACTION consumermeta(const name& consumer_id, const string& new_consumer_meta);
+  ACTION applytoevent(const name& chainomics_id, const name& event_id);
+
+  ACTION createevent(
+  const name& consumer_id, 
+  const name& event_id, 
+  const uint32_t& start_time_sec,
+  const uint32_t&  end_time_sec,
+  const string& meta
+  );
+  ACTION verifypartic(const name& event_id, const name& chainomics_id);
+
 
   ACTION delusers();
   ACTION deltokens();
   ACTION delconsumers();
   ACTION delproviders();
 
+  [[eosio::on_notify("*::transfer")]] void deposit(const name& from, const name& to, const asset& quantity, const std::string& memo);
+
 
  private:
   
-  //-------------------//
-  // Tables            //
-  //-------------------//
+  //----------//
+  // Tables   //
+  //----------//
 
   TABLE users_ {
     name chainomics_id;
     name owner;
+    name invited_by;
     uint8_t level;
     bool verified;
     bool admin_freeze;
@@ -89,16 +107,15 @@ CONTRACT mychainomics : public contract {
   TABLE events_ {
     name consumer_owner;
     name event_id;
-    uint32_t start_time_ms;
-    uint32_t end_time_ms;
+    uint32_t start_time_sec;
+    uint32_t end_time_sec;
     string meta;
     std::vector<eosio::name> required_datatypes;
     std::vector<eosio::name> participants;
+    std::vector<eosio::name> applicants;
     uint64_t primary_key() const { return event_id.value; }
   };
   typedef eosio::multi_index<"events"_n, events_> events;
-
-
 
   //-------------------//
   // Utility Functions //
@@ -116,7 +133,11 @@ CONTRACT mychainomics : public contract {
   void modify_authorized_provider(users & users_t, mychainomics::users::const_iterator chainomics_account_itr, const name& provider_id, const bool& remove);
   void modify_authorized_consumer(users & users_t, mychainomics::users::const_iterator chainomics_account_itr, const name& consumer_id, const bool& remove);
   void modify_consumer_supported_datatype(consumers& consumers_t, mychainomics::consumers::const_iterator consumer_account_itr, const name& consumer_id, const bool& remove);
-  void modify_provider_supported_datatype(consumers & providers_t, mychainomics::providers::const_iterator consumer_account_itr, const name& consumer_id, const bool& remove);
+  void modify_provider_supported_datatype(providers& providers_t, mychainomics::providers::const_iterator provider_account_itr, const name& provider_id, const bool& remove);
+  void modify_event_applicant(events& events_t, mychainomics::events::const_iterator event_account_itr, const name& chainomics_id, const bool& remove);
+  void modify_event_participant(events& events_t, mychainomics::events::const_iterator event_account_itr, const name& chainomics_id, const bool& remove);
+
+  name name_from_memo(const string memo) ;
 
   template <typename T>
   void cleanTable(name code, uint64_t account, const uint32_t batchSize) {
@@ -126,5 +147,6 @@ CONTRACT mychainomics : public contract {
     while (itr != db.end() && counter++ < batchSize) {
       itr = db.erase(itr);
     }
-  }
+  } 
 };
+

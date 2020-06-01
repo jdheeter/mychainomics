@@ -1,9 +1,10 @@
 #include <mychainomics.hpp>
 #include <token_functions.cpp>
 #include <datatype_functions.cpp>
+#include <utility_functions.cpp>
 
 
-ACTION mychainomics::adduser(const name& owner, const name& chainomics_id) {
+ACTION mychainomics::adduser(const name& owner, const name& chainomics_id, const name& invited_by) {
   require_auth(owner);
   users users_t(get_self(), get_self().value);
   auto existing = users_t.find(chainomics_id.value);
@@ -13,7 +14,57 @@ ACTION mychainomics::adduser(const name& owner, const name& chainomics_id) {
     row.owner = owner;
     row.level = 0;
     row.verified = false;
+    row.invited_by = invited_by;
   });
+}
+
+ACTION mychainomics::applytoevent(const name& chainomics_id, const name& event_id) {
+  users users_t(get_self(), get_self().value);
+  auto chainomics_account_itr = users_t.require_find(chainomics_id.value,"chainomics_id doesn't exist.");
+  require_auth(chainomics_account_itr->owner);
+  events events_t(get_self(), get_self().value);
+  auto event_itr = events_t.require_find(event_id.value,"event_id doesn't exist.");
+  modify_event_applicant(events_t,event_itr,chainomics_id,false);
+}
+
+ACTION mychainomics::verifypartic(const name& event_id, const name& chainomics_id) {
+  users users_t(get_self(), get_self().value);
+  auto chainomics_account_itr = users_t.require_find(chainomics_id.value,"chainomics_id doesn't exist.");
+
+  events events_t(get_self(),get_self().value);
+  auto event_itr = events_t.require_find(event_id.value,"event_id doesn't exist");
+
+  consumers consumers_t(get_self(),get_self().value);
+  auto consumer_itr = consumers_t.require_find(event_itr->consumer_owner.value,"consumer_owner of this event doesn't exist.");
+
+  require_auth(consumer_itr->owner);
+
+  modify_event_participant(events_t,event_itr,chainomics_id,false);
+}
+
+ACTION mychainomics::createevent(
+  const name& consumer_id, 
+  const name& event_id, 
+  const uint32_t& start_time_sec,
+  const uint32_t&  end_time_sec,
+  const string& meta
+  ) {
+    consumers consumers_t(get_self(), get_self().value);
+    auto consumer_itr = consumers_t.require_find(consumer_id.value, "consumer_id doesn't exist.");
+    require_auth(consumer_itr->owner);
+
+    events events_t(get_self(),get_self().value);
+
+    auto existing = events_t.find(event_id.value);
+    check(existing == events_t.end(), "event_id is already registered.");
+
+    events_t.emplace(get_self(), [&](auto& row) {
+      row.consumer_owner = consumer_id;
+      row.event_id = event_id;
+      row.start_time_sec = start_time_sec;
+      row.end_time_sec = end_time_sec;
+      row.meta = meta;
+    });
 }
 
 ACTION mychainomics::addprovider(const name& owner, const name& provider_id) {
@@ -21,7 +72,7 @@ ACTION mychainomics::addprovider(const name& owner, const name& provider_id) {
   providers providers_t(get_self(), get_self().value);
   auto existing = providers_t.find(provider_id.value);
   check(existing == providers_t.end(), "provider_id is already registered.");
-  providers_t.emplace(owner, [&](auto& row) {
+  providers_t.emplace(get_self(), [&](auto& row) {
     row.owner = owner;
     row.provider_id = provider_id;
   });
@@ -32,7 +83,7 @@ ACTION mychainomics::addconsumer(const name& owner, const name& consumer_id) {
   consumers consumers_t(get_self(), get_self().value);
   auto existing = consumers_t.find(consumer_id.value);
   check(existing == consumers_t.end(), "consumer_id is already registered.");
-  consumers_t.emplace(owner, [&](auto& row) {
+  consumers_t.emplace(get_self(), [&](auto& row) {
     row.owner = owner;
     row.consumer_id = consumer_id;
   });
@@ -145,10 +196,11 @@ ACTION mychainomics::internalxfer(const name& from_chainomic_account, const name
   check(quantity.amount > 0, "must transfer positive quantity");
   check(memo.size() <= 256, "memo has more than 256 bytes");
 
-  tokens tokens_t(get_self(), get_self().value);
-  auto valid_token = tokens_t.require_find(quantity.symbol.raw(), "Invalid token type.");
+  //Disable token whitelist checking during debugging
+  // tokens tokens_t(get_self(), get_self().value);
+  // auto valid_token = tokens_t.require_find(quantity.symbol.raw(), "Invalid token type.");
 
-  check(quantity.symbol == valid_token->token.get_extended_symbol().get_symbol(), "symbol precision mismatch");
+  // check(quantity.symbol == valid_token->token.get_extended_symbol().get_symbol(), "symbol precision mismatch");
 
   sub_account_token(users_t, from_chainomic_account_itr, quantity);
   add_account_token(users_t, to_chainomic_account_itr, quantity);
@@ -180,4 +232,30 @@ ACTION mychainomics::setlevel(const name& chainomic_account, const uint8_t& leve
   users_t.modify(chainomic_account_itr, get_self(), [&](auto& row) {
     row.level = level;
   });
+}
+
+void mychainomics::deposit(const name& from, const name& to, const asset& quantity, const std::string& memo) {
+  if (to != get_self()) return;
+  if (from == get_self()) return;
+
+  check( quantity.is_valid(), "invalid quantity" );
+  check( quantity.amount > 0, "must transfer positive quantity" );
+  check( memo.size() <= 256, "memo has more than 256 bytes" );
+  
+  //Disable token whitelist checking during debugging
+  // tokens tokens_t(get_self(), get_self().value);
+  // auto token_itr = tokens_t.require_find(quantity.symbol.raw(), "Token must be whitelisted to be sent to/from this contract.");
+  // check(get_first_receiver() == token_itr->token.contract, "Invalid origin token contract.");
+
+  const name destination_account = name_from_memo(memo);
+  if (destination_account == get_self()) return;
+
+  users users_t(get_self(), get_self().value);
+  auto destination_user_itr = users_t.require_find(destination_account.value,"destination_account does not exist.");
+
+  add_account_token(users_t,destination_user_itr, quantity);
+
+  // tokens_t.modify(token_itr, get_self(), [&](auto &row) { 
+  //   row.token.quantity += quantity;
+  // });
 }

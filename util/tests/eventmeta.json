@@ -1,0 +1,51 @@
+[
+  {
+    "trialID":"NCT04383574",
+    "status":"Recruting",
+    "title":"Safety and Immunogenicity Study of Inactivated Vaccine for Prevention of SARS-CoV-2 Infection(COVID-19)",
+    "conditions":"COVID-19",
+    "interventions":"Biological: Two doses of medium dosage inactivated SARS-CoV-2 vaccine at the emergency vaccination schedule",
+    "inclusions":"Healthy adults aged 18-59 years",
+    "exclusions":"Unable to take oral medication",
+    "owner":"4pwzx1uxybdx",
+    "start":34345934,
+    "end":34993454
+
+  },
+  {
+    "trialID":"NCT04380532",
+    "status":"Recruting",
+    "title":"Tableted COVID-19 Therapeutic Vaccine (COVID-19)",
+    "conditions":"COVID-19",
+    "interventions":"Biological: V-SARS",
+    "inclusions":"Confirmed cases of Covid-19 (all by RT-PCR from same laboratory)",
+    "exclusions":"Unable to take oral medication",
+    "owner":"ahb1ve4pccpl",
+    "start":34945434,
+    "end":39993344
+  },
+  {
+    "trialID":"NCT04386252",
+    "status":"Not yet Recruiting",
+    "title":"Phase Ib-II Trial of Dendritic Cell Vaccine to Prevent COVID-19 in Frontline Healthcare Workers and First Responders",
+    "conditions":"COVID-19",
+    "interventions":"Biological: V-SARS",
+    "inclusions":"Confirmed cases of Covid-19 (all by RT-PCR from same laboratory)",
+    "exclusions":"Unable to take oral medication",
+    "owner":"eup44rknbmfy",
+    "start":34753934,
+    "end":45939934
+  },
+  {
+    "trialID":"NCT04368728",
+    "status":"Recruting",
+    "title":"Study to Describe the Safety, Tolerability, Immunogenicity, and Potential Efficacy of RNA Vaccine Candidates Against COVID-19 in Healthy Adults",
+    "conditions":"SARS-CoV-2//Covid-19",
+    "interventions":"Biological: V-SARS",
+    "inclusions":"Male or female participants between the ages of 18 and 55 years, inclusive, 65 and 85 years, inclusive, or 18 and 85 years, inclusive, at randomization (dependent upon study stage).",
+    "exclusions":" Other medical or psychiatric condition including recent (within the past year) or active suicidal ideation/behavior or laboratory abnormality that may increase the risk of study participation or, in the investigator's judgment, make the participant inappropriate for the study. Known infection with human immunodeficiency virus (HIV), hepatitis C virus (HCV), or hepatitis B virus (HBV).",
+    "owner":"nlytvefngodt",
+    "start":34937934,
+    "end":44899934
+  }
+]
