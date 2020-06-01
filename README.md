@@ -13,11 +13,11 @@ To try the contract the typical order of operations would be \
 **User Setup**
 
 adduser \
-Example: https://kylin.bloks.io/transaction/3d70dc5f0a10312602ad87f7a85a667a450b4d3a06c8ee114f91409e244acb72\
+Example: https://kylin.bloks.io/transaction/3d70dc5f0a10312602ad87f7a85a667a450b4d3a06c8ee114f91409e244acb72
 setusermeta \
 Example: https://kylin.bloks.io/transaction/86fa65a05cb36da94578bf2d190fef8a718a8d04abc706e128f7067b0153a17d
 verifyuser \
-Example: https://kylin.eosq.app/tx/b3f993e14284cafbcc7327cede76a07b404d00b2e95007e12c5816c97789afe5 \
+Example: https://kylin.eosq.app/tx/b3f993e14284cafbcc7327cede76a07b404d00b2e95007e12c5816c97789afe5 
  \
 **Token setup** (optional) \
 addtoken 
@@ -26,25 +26,25 @@ Example: https://kylin.eosq.app/tx/789f7f151f82aeca93988afc4c9e76198ebe7e58dd89e
 
 **Data consumer/provider setup** \
 addconsumer \
-Example: https://kylin.eosq.app/tx/cef429786e8c1703be3452badcafae5e249db6f202e5ac98a08d0a5c416f3c75\
+Example: https://kylin.eosq.app/tx/cef429786e8c1703be3452badcafae5e249db6f202e5ac98a08d0a5c416f3c75
 
 **Register events (Clinical trials)** \
 Createevent (using a data consumer account as the owner) \
- Example: https://kylin.eosq.app/tx/4fff60b1197a44f200257bf7f163506c2acd089991ed0952ee2019746228d9b0\
+ Example: https://kylin.eosq.app/tx/4fff60b1197a44f200257bf7f163506c2acd089991ed0952ee2019746228d9b0
 
 **Users apply to participate in event** \
 applytoevent (using a user account) \
-Example:https://kylin.eosq.app/tx/97e33f2fd3eb2ef281cfbdda2358dbc38654386129a4e90a595349e413bf23e1\
+Example:https://kylin.eosq.app/tx/97e33f2fd3eb2ef281cfbdda2358dbc38654386129a4e90a595349e413bf23e1
 
 **Reward participants after an event has finished** \
 fund an internal subaccount
 Example: https://kylin.eosq.app/tx/8b7b7a9bbeea01859d3cf146dc8be345fe22fe22aa7d58f689c624032f8d781c
 setlevel \
-Example: https://kylin.eosq.app/tx/f09d91f9091680011c0a5c926be8924ca56042c1ad2d8e7d37b2c799265a2078\
+Example: https://kylin.eosq.app/tx/f09d91f9091680011c0a5c926be8924ca56042c1ad2d8e7d37b2c799265a2078
 internalxfer \
- Example:https://kylin.eosq.app/tx/198707f65364c48f81660bb794ca69b99ac2e00c8c9f7405facb5b6fa9750d1f\
+ Example:https://kylin.eosq.app/tx/198707f65364c48f81660bb794ca69b99ac2e00c8c9f7405facb5b6fa9750d1f
 verifypartic\
-Example: https://kylin.eosq.app/tx/6e4e67a206e8ab4034e3200766933046e773131d506741d1156d40ff4a97530a\
+Example: https://kylin.eosq.app/tx/6e4e67a206e8ab4034e3200766933046e773131d506741d1156d40ff4a97530a
 Breakdown of primary action functionality: \
  adduser
 Name: 
