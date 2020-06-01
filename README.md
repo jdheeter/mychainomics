@@ -28,39 +28,32 @@ Example: https://kylin.eosq.app/tx/789f7f151f82aeca93988afc4c9e76198ebe7e58dd89e
 addconsumer \
 Example: https://kylin.eosq.app/tx/cef429786e8c1703be3452badcafae5e249db6f202e5ac98a08d0a5c416f3c75\
 
-addprovider
-
- \
 **Register events (Clinical trials)** \
 Createevent (using a data consumer account as the owner) \
  Example: https://kylin.eosq.app/tx/4fff60b1197a44f200257bf7f163506c2acd089991ed0952ee2019746228d9b0\
+
 **Users apply to participate in event** \
 applytoevent (using a user account) \
 Example:https://kylin.eosq.app/tx/97e33f2fd3eb2ef281cfbdda2358dbc38654386129a4e90a595349e413bf23e1\
 
 **Reward participants after an event has finished** \
+fund an internal subaccount
+Example: https://kylin.eosq.app/tx/8b7b7a9bbeea01859d3cf146dc8be345fe22fe22aa7d58f689c624032f8d781c
 setlevel \
 Example: https://kylin.eosq.app/tx/f09d91f9091680011c0a5c926be8924ca56042c1ad2d8e7d37b2c799265a2078\
 internalxfer \
- Example:\
+ Example:https://kylin.eosq.app/tx/198707f65364c48f81660bb794ca69b99ac2e00c8c9f7405facb5b6fa9750d1f\
 verifypartic\
 Example: https://kylin.eosq.app/tx/6e4e67a206e8ab4034e3200766933046e773131d506741d1156d40ff4a97530a\
 Breakdown of primary action functionality: \
  adduser
-
 Name: 
 **owner**
-
-
-        The chain account responsible for signing transactions for this chainomics account (the internal subaccount) Can be any chain account, one chain account could be the owner of many subaccounts.
+        The chain account responsible for signing transactions for this chainomics account (the internal subaccount) Can be any chain account, one chain account could be the owner of many subaccounts. Subaccounts can hold and transfer tokens internally and externally.
 
 Name:
 **chainomics_id**(Index)
-
-
         The unique identifier for this user account. This is how the user is identified inside the contract when interacting with other aspects of the system.
-
-
     Name:\
     **invited_by**
 
@@ -69,11 +62,9 @@ Name:
 
   addtoken
 
+  extended_asset: extended_asset
 
-    extended_asset: **extended_asset**
-
-
-        Register an extended_asset (the token symbol and contract name) to be used inside the system. Tokens which are not whitelisted using this action won’t be usable in mychainomics.
+      Register an extended_asset (the token symbol and contract name) to be used inside the system. Tokens which are not whitelisted using this action won’t be usable in mychainomics.
 
  Internalxfer
 
@@ -100,7 +91,7 @@ freezeuser
 
 setusermeta
 
-Update the user metadata, should be a JSON string.
+  Update the user metadata, should be a JSON string.
 
 authdataprov
 
@@ -113,13 +104,13 @@ authdatacons
 
 addconsumer
 
-Register a data consumer.
+  Register a data consumer. Data Consumers can create events.
 
- addprovider
+addprovider
+ 
+  Register a data provider. Data Providers can pass data along to data consumers with permission from users.
 
-	Register a data provider.
-
- providermeta
+providermeta
 
 	Update provider metadata.
 
@@ -129,17 +120,13 @@ Register a data consumer.
 
  createevent
 
-
     A data consumer can register events for users to apply for
-
+ 
  applytoevent
-
-
-    Users can apply to participate in an event. \
+ 
+    Users can apply to participate in an event. 
 
 
 **Administrative actions for debugging/testing**
 
-  delusers  deltokens  delconsumers  delproviders \
- \
- \
+  delusers  deltokens  delconsumers  delproviders 
